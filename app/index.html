@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night Drive Cover Studio — GTA 6-style cover art, offline</title>
+<meta name="description" content="Turn any photo and a caption into a GTA 6-style multi-panel cover. Offline, free, exports every post size in one click.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>NIGHT DRIVE <span>Cover Studio</span></h1>
+    <p class="tagline">Leonida after dark — turn any photo into GTA 6-style cover art. 100% offline.</p>
+  </div>
+  <div class="top-actions">
+    <button id="undoBtn" type="button" disabled>↩ Undo</button>
+    <button id="redoBtn" type="button" disabled>↪ Redo</button>
+    <button id="resetBtn" type="button">Reset</button>
+  </div>
+</header>
+
+<main>
+  <section class="stage">
+    <canvas id="preview" width="720" height="540" aria-label="Live cover preview. Click a panel to select it, drag to move the photo, scroll to zoom."></canvas>
+    <p class="hint">Click a panel to select it · drag to move the photo · scroll to zoom · drop image files here</p>
+
+    <div class="sizes" id="sizesStrip">
+      <div class="size-thumb" data-size="square"><canvas></canvas><span class="size-label">1080 x 1080</span></div>
+      <div class="size-thumb" data-size="portrait"><canvas></canvas><span class="size-label">1080 x 1350</span></div>
+      <div class="size-thumb" data-size="wide"><canvas></canvas><span class="size-label">1920 x 1080</span></div>
+    </div>
+
+    <div class="export-row">
+      <button id="exportAllBtn" type="button" class="primary">Export all sizes</button>
+      <button type="button" data-export="square">1080×1080</button>
+      <button type="button" data-export="portrait">1080×1350</button>
+      <button type="button" data-export="wide">1920×1080</button>
+      <button type="button" data-export="story">1080×1920</button>
+    </div>
+    <p class="hint">One click exports all four PNGs: square, portrait, wide and story.</p>
+  </section>
+
+  <aside class="controls">
+    <section>
+      <h2>1 · Layout</h2>
+      <div id="layoutBtns" class="btn-row"></div>
+    </section>
+
+    <section>
+      <h2>2 · Grade</h2>
+      <div id="gradeBtns" class="btn-row"></div>
+    </section>
+
+    <section>
+      <h2>3 · Caption</h2>
+      <label>Title
+        <input id="titleInput" type="text" value="NIGHT DRIVE" maxlength="24" autocomplete="off">
+      </label>
+      <label>Subtitle
+        <input id="subtitleInput" type="text" value="Leonida after dark" maxlength="40" autocomplete="off">
+      </label>
+      <label>Badge
+        <input id="badgeInput" type="text" value="VICE CITY" maxlength="16" autocomplete="off">
+      </label>
+      <label>Heat <span id="starsVal">★★★★☆</span>
+        <input id="starsInput" type="range" min="0" max="5" step="1" value="4">
+      </label>
+    </section>
+
+    <section>
+      <h2>4 · Photos</h2>
+      <div class="btn-row">
+        <button id="sampleBoulevard" type="button">Boulevard</button>
+        <button id="samplePier" type="button">Pier</button>
+        <button id="sampleBoth" type="button">Both photos</button>
+      </div>
+      <label class="file-label">Add your photos
+        <input id="fileInput" type="file" accept="image/*" multiple>
+      </label>
+      <div id="tray" class="tray"></div>
+      <div class="btn-row">
+        <button id="fillOneBtn" type="button">One photo, all panels</button>
+        <button id="spreadBtn" type="button">Spread photos</button>
+        <button id="clearPhotosBtn" type="button">Clear panels</button>
+      </div>
+      <p class="hint">Click a photo chip to put it in the selected panel. Or pick the panel's photo below.</p>
+    </section>
+
+    <section>
+      <h2>5 · Selected panel</h2>
+      <p id="panelLabel" class="panel-label">Panel 1 of 9</p>
+      <label>Photo in this panel
+        <select id="panelPhoto"></select>
+      </label>
+      <label>Zoom <span id="zoomVal">1.00x</span>
+        <input id="zoomSlider" type="range" min="1" max="3" step="0.01" value="1">
+      </label>
+      <label>Pan left / right
+        <input id="panXSlider" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+      <label>Pan up / down
+        <input id="panYSlider" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+    </section>
+
+    <section>
+      <h2>6 · Effects</h2>
+      <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="vignetteToggle" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="halftoneToggle" type="checkbox" checked> Halftone dots</label>
+    </section>
+  </aside>
+</main>
+
+<footer>
+  <p>Night Drive Cover Studio — original art, no Rockstar artwork, logos or game fonts. Anton + Pacifico under the SIL Open Font License (see fonts/OFL.txt). Your photos never leave this device.</p>
+</footer>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
